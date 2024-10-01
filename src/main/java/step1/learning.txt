@@ -1,0 +1,22 @@
+Spring is an application framework.
+An application framework is a set of common functionalities that are provided by default to its user and gives
+foundation structure for developing an application.
+It eases out a lot of aspects and provides the solution of already existing problems like security, or we can say that
+it eases out the effort of writing a new application and assists the devs in focusing more on the business logic.
+
+Eg: Consider buying a bench from Amazon they will give you all the parts to make the bench. Now whether you want to
+use certain parts to make it an incline bench, decline bench or a flat bench it's up to you. Application framework
+works in the same way, it gives you a broad level of functionalities to build an application. It's up to devs to choose
+the right parts of the framework and build the business application on top of the application framework.
+
+Advantages of Application Framework:
+1) Assists in focusing more on business logic by almost removing the common challenges faced by most of the business applications
+for eg: Most business application uses similar way of communication, most business application uses similar way to increase
+performance like Caching etc. Most applications needs similar mechanism against common vulnerabilities.
+
+Inversion of Control
+It is based on principle that framework  has the control for the dependencies and framework takes control of it and not the application/user.
+
+IOC is a concept, and it's implementation is Dependency Injection and Aspects
+
+Spring modules can be used standalone as well. For eg: If we want only application context we can include only dependency for it.
