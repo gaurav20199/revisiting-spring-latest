@@ -3,7 +3,8 @@ but it is a java object that spring knows about and can control.
 Context can be considered as a place of memory in our application where we add all the objects that we want the framework
 to manage for us.
 By Default spring don't know about the object instances that are created unless they gets added in the Application Context
-Although Spring will be managing the object but User has the flexibility to instruct spring how they wants the bean to be managed.
+Although Spring will be managing the object but User has the flexibility to instruct spring how they want the bean to be managed.
+Beans created by Spring and added in context can be modified unless they are made immutable by using final.
 
 Are all objects should be created as a Bean??
 No, we should only make those objects as a bean which we might want to augment with special capabilities that spring provides
@@ -55,4 +56,4 @@ in the context then we will get NoUniqueBeanDefinitionException exception.
 No qualifying bean of type 'com.spring_revisit_latest.spring_learning.step2.Car' available: expected single matching bean but found 2: bmw,audi
 
 3) Use of @Primary Annotation
-If we have two beans of same type then Spring boot will pick up the bean that is being marked with the Primary annotation.
+If we have two beans of same type then Spring will pick up the bean that is being marked with the Primary annotation.
