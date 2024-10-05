@@ -1,0 +1,58 @@
+Bean is an instance that spring can control. Just consider it as a special Object. Bean is not just a java object,
+but it is a java object that spring knows about and can control.
+Context can be considered as a place of memory in our application where we add all the objects that we want the framework
+to manage for us.
+By Default spring don't know about the object instances that are created unless they gets added in the Application Context
+Although Spring will be managing the object but User has the flexibility to instruct spring how they wants the bean to be managed.
+
+Are all objects should be created as a Bean??
+No, we should only make those objects as a bean which we might want to augment with special capabilities that spring provides
+like transactions, logging, security, monitoring etc
+
+We can add Bean in the Context using following ways:
+1) Using @Bean annotation.
+2) Using stereotype annotation like @Component,@Controller,@Service etc
+3) Programmatically by using RegisterBean method
+
+@Configuration annotation
+Configuration annotation is used to define the classes that will be used for configuration. An app can have multiple config classes.
+A configuration class is a special class in spring app that we can use to instruct spring to do specific actions.
+In configuration class we can do multiple things one such thing is that we can define the beans.
+
+@Bean annotation
+@Bean annotation should usually be used with @Configuration annotation marked over the class.
+Whatever is the return type of the method marked with @Bean annotation that type of object will be stored in the context.
+If a bean is created it can be used anywhere in the application but there is no guarantee that the Bean will be same.
+Will get more clear in Bean life cycle.
+
+NOTE: Usual java method naming conventions doesn't apply to the Spring Beans like methods should have verb
+Eg: @Bean
+    Car bmw() {
+        Car car = new Car();
+        car.setBrand("BMW");
+        return car;
+    }
+
+By Default Spring will pick up the method name that is provided to a method annotated with @Bean and assign the method name
+as the name of the bean stored in the context that is why usually for beans the naming convention is not considered
+Every instance/bean in a context have an id, name and multiple aliases.
+
+Can we remove beans from Context??
+Yes can be done through programmatically and can't be achieved through annotations.
+
+IMP:
+1) When multiple configurations define a bean with the same name, the bean definition from the last configuration loaded will be the one used.
+Internally, Spring maintains a single BeanDefinition for each bean name. Having multiple definitions for the same name is not allowed.
+So it's not a good practice to not explicitly define the bean name. We should try to explicitly define the bean name.
+Although if in the application if two beans have same name/identifier it will again cause issue. But providing bean name explicitly is better:
+Suppose if you are refactoring a bean method name(because usually they don't follow naming convention) then ide will refactor
+all the usages of that method but not the string literal which has been used a bean name to get the bean:
+context.getBean("bmw", Car.class);
+and this can result in runtime issues. So its better to provide explicit bean name it solves this issue and is more readable as well.
+
+2) context.getBean(Car.class); will always return a single object of that type. If there are multiple objects of same type present
+in the context then we will get NoUniqueBeanDefinitionException exception.
+No qualifying bean of type 'com.spring_revisit_latest.spring_learning.step2.Car' available: expected single matching bean but found 2: bmw,audi
+
+3) Use of @Primary Annotation
+If we have two beans of same type then Spring boot will pick up the bean that is being marked with the Primary annotation.

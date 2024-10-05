@@ -1,0 +1,39 @@
+Stereotype annotation is a type of annotation in the Spring Framework that define a class's role in an application
+Use of Stereotype annotations
+Used to create beans and only one bean(instance of class where they are annotated don't confuse it with Singleton) and instruct Spring to manage it.
+it goes hand in hand with the @ComponentScan
+
+@ComponentScan
+It is used to instruct spring to look into the defined packages where stereotype annotations is used. So that spring
+can create those beans and starts managing them.
+
+How to initialize the values in case of Stereotype annotations:
+1) Using PostConstruct annotation.
+  PostConstruct annotation instructs the spring to call the method annotated with it right after the bean creation.
+  Spring will create the Bean -> Initialisation using post construct -> Spring will add bean to Context
+  Although it's not the best practice.
+
+2)
+
+
+@Bean vs Stereotype annotations
+
+
+Using the @Bean annotation
+1. You have full control over the instance creation you add to the Spring context. It is your responsibility to create and configure the instance in the body of the method annotated with @Bean.
+Spring only takes that instance and adds it to the context as it is.
+2. You can use this method to add more instances of the same type to the Spring context. In step2  we added two Car instances into the Spring context.
+3. You can use the @Bean annotation to add to the Spring context any object instance. The class that defines the instance doesn't need to be defined in your app.
+Earlier we added a String and an Integer to the Spring context.
+4. Need to write a separate method for each bean that will be created. This adds a lot of boilerplate code and usually
+stereotype annotations is generally used over @Bean annotation.
+
+Using stereotype annotations
+1. You only have control over the instance after the framework creates it.
+2. This way, you can only add one instance of the class to the context.
+3. You can use stereotype annotations only to create beans of the classes your application owns. For example,
+you couldn't add a bean of type String or Integer because you don't own these classes to change them by adding a stereotype annotation.
+4. Using stereotype annotations to add beans to the Spring context doesn't add boilerplate code to your app. You'll prefer this approach in general for the classes
+
+
+
