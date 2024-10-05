@@ -1,0 +1,82 @@
+Wiring of Beans
+Wiring of Beans refers to when we want to establish a "has-a" relationship between two beans programmatically.
+Ex: Shown in WiringConfig class
+
+Spring guarantees that dependencies are resolved before a bean is created
+1) In the example for WiringConfig. This is the process flow:
+when Spring encounters a @Configuration class it creates a CGLIB proxy. This proxy ensures that if any method within the
+configuration class calls another method that is annotated with @Bean, Spring does not execute the method directly but
+checks the Spring context first to see if the bean has already been created.
+2) By Default Spring creates all the Beans eagerly and not lazily unless they are explicitly marked with @Lazy.
+3) Order of Bean Creation:
+  3.1) When the Spring container initializes, it will start by processing the beans one by one.
+  3.2) If Spring decides to create the Car bean (createCar()) first, it will notice that the Car bean requires an Engine.
+       At this point, it will call createEngine() to ensure the engine bean is created and available for injection.
+  3.3) If Spring creates the Engine bean (createEngine()) first, then it will simply store it in the context and reuse
+       it when the Car bean is being created.
+
+4) So, in practice, Spring will make sure that by the time the Car is created, the Engine bean is already available,
+regardless of which method is called first internally
+
+Auto-wiring of Beans
+Auto-wiring of Beans refers to when we instruct spring to establish the "has-a" relationship between two beans. Spring will
+automatically do it using Dependency injection.
+
+Dependency Injection:
+Dependency Injection is a design pattern where the responsibility of creating objects is transferred from the class itself
+to an external framework like Spring. Instead of a class creating its own dependencies (objects it needs to function),
+those dependencies are "injected" into the class by the framework.
+Eg: Imagine a car that needs an engine to work. Instead of the car building the engine itself, it’s provided with an engine,
+allowing the car to focus on its behaviours like Driving etc.
+
+Dependency Injection using Parameter
+Example Shown in DiWithParameterConfig.
+Here we are instructing Spring to take the Parameter(Engine) from the context and inject it in the bean.
+In our example we only have one engine in the application context but if they are multiple engine then we will have to
+either use Qualifier or Primary annotation to resolve this issue.
+Eg: @Bean(value="maruti")
+    Car createCar(@Qualifier("marutiEngine") Engine engine) {
+        Car car = new Car();
+        car.setBrand("MARUTI");
+        car.setEngine(engine);
+        return car;
+    }
+
+    Using Primary annotation
+    @Bean(value="marutiEngine")
+    @Primary
+    Engine createEngine() {
+        Engine engine = new Engine();
+        engine.setEngineModelNo(124);
+        return engine;
+    }
+
+    @Bean(value="hondaEngine")
+    Engine createAnotherEngine() {
+        Engine engine = new Engine();
+        engine.setEngineModelNo(456);
+        return engine;
+    }
+
+If there are multiple beans of the same type in the context, and we fail to specify which context we want spring to inject
+then Spring will throw NoUniqueBeanDefinitionException
+
+Dependency injection using Autowired
+1) Auto-wiring using field injection
+Here Spring will inject the field by internally using Java Reflection.
+Eg: AutoWiringConfig class and CarWithFieldInjection. Engine is injected into the Car with field injection
+Usually this approach is not preferred because of lack of immutability. We can't use @Autowired and final keyword
+at the same time if we are not initialising the object. This can only be possible if we are initialising it in
+constructor that is constructor injection approach.
+
+Wiring of Beans and Creation of Beans should be treated separately
+Explanation: Don't have this confusion that @Autowired annotation can be used only with Stereotype annotations.
+Autowired annotation is a way using which Spring is auto-establishing relationship between two beans. Spring only
+cares about that the bean which has to be autowired should be present in its context. It doesn't concern with how
+that bean was put in the context whether through Bean annotation, Stereotype annotation or through Register Bean method.
+See example: CarWithFieldInjection don't have any stereotype annotation, but we are using Autowired annotation there.
+
+2) Auto-wiring using setter injection
+Here Spring will inject the value in the parameter of the Setter method annotated with @AutowiredAnnotation, and then
+we can write our business logic and can manipulate the parameter as per our need.
+IMP: Spring will only inject it in the parameter of the setter method and not actually on the attribute/field.
