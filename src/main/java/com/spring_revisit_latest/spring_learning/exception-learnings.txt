@@ -1,0 +1,6 @@
+NoSuchBeanDefinitionException:No qualifying bean of type 'com.spring_revisit_latest.spring_learning.step2.Car' available
+Explanation: Spring is not able to find bean of given type in the application context.
+
+NoUniqueBeanDefinitionException: No qualifying bean of type 'com.spring_revisit_latest.spring_learning.step2.Car' available:
+expected single matching bean but found 2: bmw,audi
+Explanation:
