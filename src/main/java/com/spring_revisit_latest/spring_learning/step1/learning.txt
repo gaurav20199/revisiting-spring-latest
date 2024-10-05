@@ -19,4 +19,10 @@ It is based on principle that framework  has the control for the dependencies an
 
 IOC is a concept, and it's implementation is Dependency Injection and Aspects
 
-Spring modules can be used standalone as well. For eg: If we want only application context we can include only dependency for it.
+Spring is created to be modular. Spring modules can be used standalone as well. This is done to minimize the footprint of app.
+For eg: If we want only application context we can include only dependency for it.
+There should usually be only one application context for the whole application. Having multiple contexts may need to un-necessary
+complications. Although there are ways to have multiple contexts in a spring application.
+Context is based on Factory Design Pattern.
+There can be multiple implementation of ApplicationContext Interface some are based on XML approach which is not used nowadays.
+In Application Context, you can have any object including String, Integer, Long etc
