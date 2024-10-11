@@ -59,7 +59,9 @@ Eg: @Bean(value="maruti")
     }
 
 If there are multiple beans of the same type in the context, and we fail to specify which context we want spring to inject
-then Spring will throw NoUniqueBeanDefinitionException
+then Spring will throw NoUniqueBeanDefinitionException.
+DI on parameter is still better than the wiring beans by ourselves approach as if there are multiple beans of same type
+then the wiring beans approach will not work as there we are just invoking the function.
 
 Dependency injection using Autowired
 1) Auto-wiring using field injection
@@ -79,4 +81,54 @@ See example: CarWithFieldInjection don't have any stereotype annotation, but we 
 2) Auto-wiring using setter injection
 Here Spring will inject the value in the parameter of the Setter method annotated with @AutowiredAnnotation, and then
 we can write our business logic and can manipulate the parameter as per our need.
-IMP: Spring will only inject it in the parameter of the setter method and not actually on the attribute/field.
+IMP: Spring will only inject it in the parameter of the setter method and not actually on the attribute/field of the instance.
+
+3) Auto-wiring using Constructor Injection
+Here Spring will inject the value in the constructor parameter, and then we can write our business logic and manipulate as
+per our need.
+IMP: Spring will only inject it in the parameter of the constructor
+If there is only one constructor available then we don't even have to write Autowired annotation.
+This approach has benefits:
+1)Since we don't have to write Autowired annotation over constructor, now we can easily do unit testing. Tests are independent
+and completely detached from the Framework.
+Without @Autowired, constructors are plain Java constructors, and you can easily instantiate the class with its dependencies
+manually in your unit tests without needing Spring’s context or dependency injection framework.
+This allows you to use mock objects (e.g., using Mockito) or stubs for dependencies in your unit tests, making the testing
+process much more lightweight and independent of the Spring framework.
+
+2) If @Autowired is used, your unit tests might require some Spring-specific configuration or annotations (e.g., @RunWith(SpringJUnit4ClassRunner.class),
+@ContextConfiguration) to wire up the dependencies, which can clutter the test code and make it more complex.
+   Avoiding @Autowired on constructors means your test code stays clean, with no reliance on the Spring testing framework
+   unless absolutely necessary.
+
+3)Since we have this flexibility we can easily use Lombok and remove a lot of boilerplate. Previously it wasn't possible
+using lombok and spring together to generate constructors. Writing autowired annotation requires constructor to be written
+in the class.
+
+Constructor injection with @Autowired approach is usually avoided with @Bean annotation combination
+For eg: check not preferred way package. In the NotPreferredWiringConfig we are creating two beans NotPreferred Car and Engine.
+Now If we try to use Constructor Injection then Constructor will always be parameterised. If Constructor is parameterised
+then using @Bean annotation we have to use the parameterised constructor as well and to pass the dependency we have to use
+Dependency Injection using Parameter.
+Although this way will also work, but it is not that readable since, although we are using Autowired annotation but that is
+not required since spring is wiring the Engine dependency in the wiring config class itself.
+From Spring 4.3 if a class only have one constructor then we don't have to write Autowired annotation over it.
+
+How Stereotype annotation works behind the scenes??
+Component Scanning: Spring scans for classes annotated with @Component (or its variants like @Service, @Repository, @Controller).
+Bean Definition Registration: Spring registers these classes as beans in the application context.
+Dependency Injection: Spring resolves and injects dependencies (via constructor, setter, or field injection).
+Bean Instantiation: Spring instantiates the bean when required (typically eagerly for singletons).
+Proxy Creation (if applicable): For beans needing transactions, AOP, etc., Spring creates proxies to handle those concerns.
+Bean Lifecycle Management: Spring manages the lifecycle of the bean, from initialization to destruction.
+
+Handling Circular Dependencies
+Best way is to redesign the code. This is the ultimate way.
+Other possible solutions:
+1) Not using constructor injection and using field,setter injection
+Circular dependencies usually arise when using constructor injection, as Spring tries to instantiate the beans and inject
+dependencies at the same time, leading to a cycle it cannot break.
+In Field Injection: Spring handles the lifecycle of the beans and injects them once the beans are created.
+In Setter Injection: setter injection allows Spring to first create the beans independently, and then resolve the dependencies
+in a second phase, avoiding the circular reference problem.
+
