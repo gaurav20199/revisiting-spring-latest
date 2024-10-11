@@ -3,6 +3,8 @@ Use of Stereotype annotations
 Used to create beans and only one bean(instance of class where they are annotated don't confuse it with Singleton) and instruct Spring to manage it.
 it goes hand in hand with the @ComponentScan
 
+For Stereotype annotations, Spring checks the className makes the first character small and use that name as the bean name.
+
 @ComponentScan
 It is used to instruct spring to look into the defined packages where stereotype annotations is used. So that spring
 can create those beans and starts managing them.

@@ -38,6 +38,7 @@ By Default Spring will pick up the method name that is provided to a method anno
 as the name of the bean stored in the context that is why usually for beans the naming convention is not considered
 Every instance/bean in a context have an id, name and multiple aliases.
 
+
 Can we remove beans from Context??
 Yes can be done through programmatically and can't be achieved through annotations.
 
