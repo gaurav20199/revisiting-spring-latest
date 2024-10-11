@@ -45,6 +45,26 @@ scopes by its clients. In most cases, a specific client don't use a big part of 
 beans together with the Spring context unnecessarily occupied a lot of memory. For this kind of app, the developers can
 design most of the beans to be lazily instantiated so that the app would create only the necessary instances.
 
+Prototype Scope
+They are created by the Spring when they are explicitly requested and are not created when spring initialises the context.
+Prototype Beans are Lazily Initialised by default
+If you never request a prototype bean, it will never be created. Spring won't create or manage the lifecycle of
+prototype beans unless explicitly asked to do so.
+User will have to mention this scope specifically using Scope annotation.
+For Bean with prototype scope Every time you request a reference to a prototype-scoped bean, Spring creates a new object instance.
+For prototype beans, Spring don’t create and manage an object instance directly.
+With prototype beans, we no longer have concurrency problems because each thread that requests the bean gets a different
+instance, so defining mutable prototype beans is not a problem.
+
+IMP:
+If a bean is a singleton, which means that Spring creates only an instance of this class. As a consequence, Spring will
+also inject the dependencies of this class just once when it creates the CommentService bean itself. In this case,
+you’ll end up with only an instance of the injected bean even if the bean that is being injected to singleton bean has
+been defined with prototype scope.
+Be careful with injecting a prototype-scoped bean into a singleton-scoped bean. When you do something like this, you
+need to be aware that the singleton instance always uses the same prototype instance, which Spring injects when it
+creates the singleton instance. This is usually a vicious design because the point of making a bean prototype-scoped is
+to get a different instance for every use.
 
 
 
