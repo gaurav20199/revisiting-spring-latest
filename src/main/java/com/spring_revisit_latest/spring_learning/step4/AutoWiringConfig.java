@@ -15,10 +15,10 @@ public class AutoWiringConfig {
         return engine;
     }
 
-    Car createCar() {
-        Car car = new Car();
+    @Bean(value = "marutiCar")
+    CarWithFieldInjection createCar() {
+        CarWithFieldInjection car = new CarWithFieldInjection();
         car.setBrand("MARUTI");
-        car.setEngine(createEngine());
         return car;
     }
 }
