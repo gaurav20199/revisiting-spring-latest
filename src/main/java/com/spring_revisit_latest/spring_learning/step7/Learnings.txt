@@ -1,0 +1,73 @@
+                                        Terminologies
+
+Aspect: An aspect is an object that intercepts a method call and can execute logic before, after, and even instead of
+executing the intercepted method. This helps you decouple part of the code from the business implementation and makes
+your app easier to maintain.
+Advice: When the app should execute this logic of the aspect (e.g., before or after the method call, instead of the
+method call). This is named the advice.
+Pointcut: Which methods the framework needs to intercept and execute the aspect for them. This is named a pointcut.
+Join Point: It defines the event that triggers the execution of an aspect. But with Spring, this event is always a
+method call.
+Target Object: The bean that declares the method intercepted by an aspect is named the target object.
+
+             Aspect                Advice                                                                   Target Object
+               |                      |                                                                         |
+ We want some logic to be executed before each execution of method publishComment(), which belongs to the CommentService bean.
+                              |                                    |
+                           Join Point                            Point Cut
+
+How to Define an Aspect:
+Aspect can be defined with the Aspect annotation. But as we already know Spring provides special capabilities to only
+the bean instances present in its context so Aspect has to be a bean as well which can be created either using Stereotype
+annotation with @Aspect annotation or @Bean annotation with @Aspect annotation.
+
+Weaving-How does Spring intercept each method call and apply the aspect logic?
+If the bean is an aspect target, Spring does not provide you a reference to the actual object. Instead, Spring gives you
+a reference to a proxy object that can manage each call to the intercepted method and apply the aspect logic.
+You will now receive the proxy instead of the bean anytime you get the bean from the context, either if you directly use
+the getBean() method of the context or if you use DI. This approach is called Weaving.
+
+Intercepted Objects vs Not Intercepted Objects
+When a method isn’t aspected, the call goes directly to that method. When we define an aspect for a method, the call
+goes through the proxy object. The proxy object applies the logic defined by the aspect and then delegates the call to
+the real method.
+
+Process of Creating an Aspect:
+Enable the aspect mechanism in your Spring app by annotating the configuration class with the @EnableAspectJAutoProxy
+annotation.
+Create a new class, and annotate it with the @Aspect annotation. Using either @Bean or stereotype annotations, add a bean
+for this class in the Spring context.
+Define a method that will implement the aspect logic and tell Spring when and which methods to intercept using an advice
+annotation.
+Implement the aspect logic.
+
+Advice Annotations:
+@Around: The @Around allows us to fully control the method execution, providing the opportunity to modify the input,
+alter the return value, or even skip the target method altogether.
+To leverage the @Around annotation, use it on a method within the aspect. The method accepts a parameter of type
+ProceedingJoinPoint. In the advice, call proceed() on the ProceedingJoinPoint to invoke the actual method.
+
+@Before—Calls the method defining the aspect logic before the execution of the intercepted method.
+@AfterReturning-It Calls the method defining the aspect logic after the actual method successfully returns, and provides
+the returned value as a parameter to the aspect method. The aspect method isn’t called if the intercepted method throws
+an exception.
+@AfterThrowing—Calls the method defining the aspect logic if the intercepted method throws an exception, and provides
+the exception instance as a parameter to the aspect method.
+@After—Calls the method defining the aspect logic only after the intercepted method execution, whether the method
+successfully returned or threw an exception.
+
+
+Advantages:
+Using an aspect, you can write logic that executes with a method execution while being completely decoupled from that
+method. This way, someone who reads the code only sees what’s relevant regarding the business implementation.
+Aspects support many essential Spring capabilities like transactions and securing methods.
+
+Disadvantages:
+However, aspects can be a dangerous tool. Over-engineering your code with aspects will make your app less maintainable.
+You don’t need to use aspects everywhere. When using them, make sure they really help your implementation.
+
+
+Multiple aspects over the same executing method
+Multiple aspects can intercept the same method call. In this case, it’s recommended that you define an order for the
+aspects to execute using the @Order annotation.
+
