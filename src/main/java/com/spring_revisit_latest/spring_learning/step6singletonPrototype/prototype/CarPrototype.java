@@ -1,4 +1,4 @@
-package com.spring_revisit_latest.spring_learning.step6.prototype;
+package com.spring_revisit_latest.spring_learning.step6singletonPrototype.prototype;
 
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;

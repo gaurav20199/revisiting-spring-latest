@@ -1,4 +1,4 @@
-package com.spring_revisit_latest.spring_learning.step6;
+package com.spring_revisit_latest.spring_learning.step6singletonPrototype;
 
 public class Car {
     private String brand;
