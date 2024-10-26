@@ -1,7 +1,7 @@
-package com.spring_revisit_latest.spring_learning.aspects.example1;
+package com.spring_revisit_latest.spring_learning.step7aspects.example1;
 
-import com.spring_revisit_latest.spring_learning.aspects.CarAspect;
-import com.spring_revisit_latest.spring_learning.aspects.ProjectConfig;
+import com.spring_revisit_latest.spring_learning.step7aspects.CarAspect;
+import com.spring_revisit_latest.spring_learning.step7aspects.ProjectConfig;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 

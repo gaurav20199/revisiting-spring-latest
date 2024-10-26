@@ -1,4 +1,4 @@
-package com.spring_revisit_latest.spring_learning.aspects;
+package com.spring_revisit_latest.spring_learning.step7aspects;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

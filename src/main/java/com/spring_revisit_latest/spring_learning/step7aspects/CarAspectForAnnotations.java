@@ -1,4 +1,4 @@
-package com.spring_revisit_latest.spring_learning.aspects;
+package com.spring_revisit_latest.spring_learning.step7aspects;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
