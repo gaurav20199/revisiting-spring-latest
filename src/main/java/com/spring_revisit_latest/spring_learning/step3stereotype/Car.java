@@ -1,4 +1,4 @@
-package com.spring_revisit_latest.spring_learning.step3;
+package com.spring_revisit_latest.spring_learning.step3stereotype;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;

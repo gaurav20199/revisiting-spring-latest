@@ -1,4 +1,4 @@
-package com.spring_revisit_latest.spring_learning.step3;
+package com.spring_revisit_latest.spring_learning.step3stereotype;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
