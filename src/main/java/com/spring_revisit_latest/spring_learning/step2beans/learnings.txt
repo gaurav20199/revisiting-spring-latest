@@ -54,7 +54,7 @@ and this can result in runtime issues. So its better to provide explicit bean na
 
 2) context.getBean(Car.class); will always return a single object of that type. If there are multiple objects of same type present
 in the context then we will get NoUniqueBeanDefinitionException exception.
-No qualifying bean of type 'com.spring_revisit_latest.spring_learning.step2.Car' available: expected single matching bean but found 2: bmw,audi
+No qualifying bean of type 'com.spring_revisit_latest.spring_learning.step2beans.Car' available: expected single matching bean but found 2: bmw,audi
 
 3) Use of @Primary Annotation
 If we have two beans of same type then Spring will pick up the bean that is being marked with the Primary annotation.

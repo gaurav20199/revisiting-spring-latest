@@ -1,4 +1,4 @@
-package com.spring_revisit_latest.spring_learning.step2;
+package com.spring_revisit_latest.spring_learning.step2beans;
 
 import org.springframework.context.annotation.Bean;
 
