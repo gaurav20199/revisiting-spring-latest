@@ -1,5 +1,5 @@
-package com.spring_revisit_latest.spring_learning.step4.notpreferred;
-import com.spring_revisit_latest.spring_learning.step4.Engine;
+package com.spring_revisit_latest.spring_learning.step4wiringAutowiring.notpreferred;
+import com.spring_revisit_latest.spring_learning.step4wiringAutowiring.Engine;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class NotPreferredCar {

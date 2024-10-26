@@ -1,4 +1,4 @@
-package com.spring_revisit_latest.spring_learning.step4;
+package com.spring_revisit_latest.spring_learning.step4wiringAutowiring;
 
 public class Engine {
     private int engineModelNo;

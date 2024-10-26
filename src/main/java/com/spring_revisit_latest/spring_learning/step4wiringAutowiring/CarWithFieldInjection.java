@@ -1,7 +1,7 @@
-package com.spring_revisit_latest.spring_learning.step4;
+package com.spring_revisit_latest.spring_learning.step4wiringAutowiring;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+
 public class CarWithFieldInjection {
     private String brand;
     private String model;

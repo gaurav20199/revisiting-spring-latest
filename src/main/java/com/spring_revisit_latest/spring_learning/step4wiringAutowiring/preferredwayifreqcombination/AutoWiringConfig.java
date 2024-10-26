@@ -1,6 +1,6 @@
-package com.spring_revisit_latest.spring_learning.step4.preferredwayifreqcombination;
+package com.spring_revisit_latest.spring_learning.step4wiringAutowiring.preferredwayifreqcombination;
 
-import com.spring_revisit_latest.spring_learning.step4.Engine;
+import com.spring_revisit_latest.spring_learning.step4wiringAutowiring.Engine;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

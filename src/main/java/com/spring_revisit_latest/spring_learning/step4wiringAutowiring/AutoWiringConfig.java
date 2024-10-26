@@ -1,4 +1,4 @@
-package com.spring_revisit_latest.spring_learning.step4;
+package com.spring_revisit_latest.spring_learning.step4wiringAutowiring;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
